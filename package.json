@@ -5,7 +5,7 @@
   "description": "A sample admin dashboard based on black dashboard UI template",
   "author": "cristian.jora <joracristi@gmail.com>",
   "scripts": {
-    "serve": "vue-cli-service serve --open",
+    "serve": "vue-cli-service serve --port 8000",
     "build": "vue-cli-service build",
     "e2e": "node test/e2e/runner.js",
     "lint": "vue-cli-service lint",
