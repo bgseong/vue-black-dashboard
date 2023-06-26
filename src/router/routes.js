@@ -1,6 +1,7 @@
 import DashboardLayout from "@/layout/dashboard/DashboardLayout.vue";
 // GeneralViews
 import NotFound from "@/pages/NotFoundPage.vue";
+import store from "@/store/index.js";
 
 // Admin pages
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */"@/pages/Dashboard.vue");
@@ -11,6 +12,15 @@ const Maps = () => import(/* webpackChunkName: "common" */ "@/pages/Maps.vue");
 const Typography = () => import(/* webpackChunkName: "common" */ "@/pages/Typography.vue");
 const TableList = () => import(/* webpackChunkName: "common" */ "@/pages/TableList.vue");
 const Login = () => import(/* webpackChunkName: "common" */"@/pages/Login.vue")
+
+const requireAuth = () => (to, from, next) => {
+  if (store.state.token) {
+    return next();
+  }
+  next('/login');
+};
+
+
 
 const routes = [
   {
@@ -26,37 +36,44 @@ const routes = [
       {
         path: "dashboard",
         name: "dashboard",
-        component: Dashboard
+        component: Dashboard,
+        beforeEnter: requireAuth()
       },
       {
         path: "profile",
         name: "profile",
-        component: Profile
+        component: Profile,
+        beforeEnter: requireAuth()
       },
       {
         path: "notifications",
         name: "notifications",
-        component: Notifications
+        component: Notifications,
+        beforeEnter: requireAuth()
       },
       {
         path: "icons",
         name: "icons",
-        component: Icons
+        component: Icons,
+        beforeEnter: requireAuth()
       },
       {
         path: "maps",
         name: "maps",
-        component: Maps
+        component: Maps,
+        beforeEnter: requireAuth()
       },
       {
         path: "typography",
         name: "typography",
-        component: Typography
+        component: Typography,
+        beforeEnter: requireAuth()
       },
       {
         path: "table-list",
         name: "table-list",
-        component: TableList
+        component: TableList,
+        beforeEnter: requireAuth()
       }
     ]
   },

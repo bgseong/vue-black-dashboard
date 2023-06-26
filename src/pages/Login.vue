@@ -35,7 +35,7 @@
       saveData.password = this.userPassword;
       try {
         this.$axios
-          .post("http://localhost:8080/api/authenticate", JSON.stringify(saveData), {
+          .post("http://localhost:8080/auth/authenticate", JSON.stringify(saveData), {
             headers: {
               "Content-Type": `application/json`,
             },
