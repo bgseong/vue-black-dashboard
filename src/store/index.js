@@ -1,14 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import userStore from './module/userstore';
 
-import userStore from '@/store/module/userstore.js'
-
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 
 const store = new Vuex.Store({
     modules: {
-        userStore: userStore,
+        userstore: userStore,
     }
 })
 

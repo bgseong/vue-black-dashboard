@@ -30,11 +30,10 @@ Vue.use(VueRouter);
 Vue.use(RouterPrefetch);
 Vue.prototype.$axios = axios;
 
-
 /* eslint-disable no-new */
 new Vue({
   router,
-  i18n,
   store,
+  i18n,
   render: h => h(App)
 }).$mount("#app");

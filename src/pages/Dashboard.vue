@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-12">
         <card type="chart">
           <template slot="header">
@@ -92,7 +92,7 @@
           </div>
         </card>
       </div>
-    </div>
+    </div> -->
     <div class="row">
       <div class="col-lg-6 col-md-12">
         <card type="tasks" :header-classes="{'text-right': isRTL}">
@@ -257,7 +257,6 @@
           }],
           labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
         }
-        this.$refs.bigChart.updateGradients(chartData);
         this.bigLineChart.chartData = chartData;
         this.bigLineChart.activeIndex = index;
       }
