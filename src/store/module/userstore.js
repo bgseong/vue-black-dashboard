@@ -5,7 +5,12 @@ const userStore = {
         userId:'',
         userName:'',
         email:'',
-        token: ''
+        token: '',
+        activated: '',
+        authorities: '',
+        aboutMe: '',
+
+
     },
     mutations: {
         login: function (state, payload) {
@@ -17,9 +22,21 @@ const userStore = {
             state.userId = payload.id;
             state.userName = payload.username;
             state.email = payload.email;
-            sessionStorage.setItem("id", payload.id);
-            sessionStorage.setItem("username", payload.username);
-            sessionStorage.setItem("email", payload.email);
+            state.activated = payload.activated;
+            state.aboutMe = payload.aboutMe;
+            state.authorities = payload.authorityDtoSet;
+
+
+            const data = {
+                userId : payload.id,
+                userName : payload.username,
+                email : payload.email,
+                aboutMe : payload.aboutMe,
+                activated: payload.activated,
+                authorities : payload.authorityDtoSet,
+            
+            }
+            sessionStorage.setItem("user",JSON.stringify(data));
         }
 
     }

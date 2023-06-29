@@ -3,15 +3,6 @@
   <card>
     <h5 slot="header" class="title">Edit Profile</h5>
     <div class="row">
-      <div class="col-md-5 pr-md-1">
-        <base-input
-          label="Company (disabled)"
-          placeholder="Company"
-          v-model="model.company"
-          disabled
-        >
-        </base-input>
-      </div>
       <div class="col-md-3 px-md-1">
         <base-input
           label="Username"
@@ -25,11 +16,20 @@
           label="Email address"
           type="email"
           placeholder="mike@email.com"
+          v-model="model.email"
+        >
+        </base-input>
+      </div>
+      <div class="col-md-4 pl-md-1">
+        <base-input
+          label="password"
+          type="password"
+          v-model="model.password"
         >
         </base-input>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-md-6 pr-md-1">
         <base-input
           label="First Name"
@@ -56,8 +56,8 @@
         >
         </base-input>
       </div>
-    </div>
-    <div class="row">
+    </div> -->
+    <!-- <div class="row">
       <div class="col-md-4 pr-md-1">
         <base-input label="City" v-model="model.city" placeholder="City">
         </base-input>
@@ -73,7 +73,7 @@
       <div class="col-md-4 pl-md-1">
         <base-input label="Postal Code" placeholder="ZIP Code"> </base-input>
       </div>
-    </div>
+    </div> -->
     <div class="row">
       <div class="col-md-8">
         <base-input>
@@ -83,13 +83,13 @@
             cols="80"
             class="form-control"
             placeholder="Here can be your description"
-            v-model="model.about"
+            v-model="model.aboutMe"
           >
           </textarea>
         </base-input>
       </div>
     </div>
-    <base-button slot="footer" type="primary" fill>Save</base-button>
+    <base-button v-on:click="update" slot="footer" type="primary" fill>Save</base-button>
   </card>
 </template>
 <script>
@@ -101,6 +101,32 @@ export default {
         return {};
       }
     }
+  },
+
+  methods: {
+    update() {
+      console.log(JSON.stringify(this.model));
+      try {
+        this.$axios
+          .put(`http://localhost:8080/api/user/${sessionStorage.getItem("id")}`, JSON.stringify(this.model), {
+            headers: {
+              "Content-Type": `application/json`,
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`
+            },
+          })
+          .then((res) => {
+            if (res.status === 200) {
+                console.log(res.data);
+                this.$store.commit("loadInfo", res.data);
+              
+                this.$router.go(0);
+            }
+          });
+
+      } catch (error) {
+        console.error(error);
+      }
+    },
   }
 };
 </script>
