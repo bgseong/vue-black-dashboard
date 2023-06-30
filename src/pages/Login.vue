@@ -42,7 +42,6 @@
           })
           .then((res) => {
             if (res.status === 200) {
-                console.log(res.data);
                 this.$store.commit("login", res.data);
               
                 this.$router.push("/loadInfo");

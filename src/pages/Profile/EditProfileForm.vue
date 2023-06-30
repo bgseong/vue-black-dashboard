@@ -105,10 +105,9 @@ export default {
 
   methods: {
     update() {
-      console.log(JSON.stringify(this.model));
       try {
         this.$axios
-          .put(`http://localhost:8080/api/user/${sessionStorage.getItem("id")}`, JSON.stringify(this.model), {
+          .put(`http://localhost:8080/api/user/${JSON.parse(sessionStorage.getItem("user")).userId}`, JSON.stringify(this.model), {
             headers: {
               "Content-Type": `application/json`,
               Authorization: `Bearer ${sessionStorage.getItem("token")}`
@@ -119,7 +118,6 @@ export default {
                 console.log(res.data);
                 this.$store.commit("loadInfo", res.data);
               
-                this.$router.go(0);
             }
           });
 

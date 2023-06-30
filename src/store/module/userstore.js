@@ -6,8 +6,6 @@ const userStore = {
         userName:'',
         email:'',
         token: '',
-        activated: '',
-        authorities: '',
         aboutMe: '',
 
 
@@ -16,15 +14,12 @@ const userStore = {
         login: function (state, payload) {
             state.token = payload.token;
             sessionStorage.setItem("token", payload.token);
-            console.log(state.token);
         },
         loadInfo: function (state,payload) {
             state.userId = payload.id;
             state.userName = payload.username;
             state.email = payload.email;
-            state.activated = payload.activated;
             state.aboutMe = payload.aboutMe;
-            state.authorities = payload.authorityDtoSet;
 
 
             const data = {
@@ -32,8 +27,6 @@ const userStore = {
                 userName : payload.username,
                 email : payload.email,
                 aboutMe : payload.aboutMe,
-                activated: payload.activated,
-                authorities : payload.authorityDtoSet,
             
             }
             sessionStorage.setItem("user",JSON.stringify(data));
