@@ -25,8 +25,6 @@
           username: userData.userName,
           password: "",
           aboutMe: userData.aboutMe,
-          activated: userData.activated,
-          authorities : userData.authorities,
         },
         user: {
           fullName: userData.userName,
