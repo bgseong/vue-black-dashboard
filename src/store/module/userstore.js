@@ -30,6 +30,10 @@ const userStore = {
             
             }
             sessionStorage.setItem("user",JSON.stringify(data));
+        },
+        logout: function() {
+            sessionStorage.removeItem("user");
+            sessionStorage.removeItem("token");
         }
 
     }

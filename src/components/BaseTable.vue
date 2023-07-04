@@ -1,5 +1,6 @@
 <template>
   <table class="table tablesorter" :class="tableClass">
+
     <thead :class="theadClasses">
     <tr>
       <slot name="columns">
@@ -22,6 +23,7 @@
 </template>
 <script>
   export default {
+    
     name: 'base-table',
     props: {
       columns: {
@@ -52,6 +54,7 @@
     },
     computed: {
       tableClass() {
+        console.log(this.data);
         return this.type && `table-${this.type}`;
       }
     },
@@ -62,7 +65,8 @@
       itemValue(item, column) {
         return item[column.toLowerCase()];
       }
-    }
+      
+    },
   };
 </script>
 <style>

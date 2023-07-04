@@ -10,6 +10,7 @@ const Maps = () => import(/* webpackChunkName: "common" */ "@/pages/Maps.vue");
 const Typography = () => import(/* webpackChunkName: "common" */ "@/pages/Typography.vue");
 const TableList = () => import(/* webpackChunkName: "common" */ "@/pages/TableList.vue");
 const Login = () => import(/* webpackChunkName: "common" */"@/pages/Login.vue");
+const Logout = () => import(/* webpackChunkName: "common" */"@/pages/Logout.vue");
 const LoadInfo = () => import(/* webpackChunkName: "common" */"@/pages/LoadInfo.vue");
 
 const requireAuth = () => (to, from, next) => {
@@ -28,6 +29,11 @@ const routes = [
     component: DashboardLayout,
     redirect: "/dashboard",
     children: [
+      {
+        path: "logout",
+        name: "logout",
+        component: Logout
+      },
       {
         path: "login",
         name: "login",
