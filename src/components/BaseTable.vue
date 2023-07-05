@@ -10,7 +10,7 @@
     </thead>
     <tbody :class="tbodyClasses">
     <tr v-for="(item, index) in data" :key="index">
-      <slot :row="item">
+      <slot :row="item" >
         <td v-for="(column, index) in columns"
             :key="index"
             v-if="hasValue(item, column)">
@@ -54,7 +54,6 @@
     },
     computed: {
       tableClass() {
-        console.log(this.data);
         return this.type && `table-${this.type}`;
       }
     },
