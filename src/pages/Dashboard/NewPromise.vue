@@ -4,13 +4,28 @@
       <div class="row">
         <div class="col-md-10">
           <base-input>
-            <label>About Me</label>
+            <label>새 약속</label>
             <textarea
               rows="10"
               cols="150"
               class="form-control"
               placeholder="Here can be your description"
-              v-model="model.aboutMe"
+              v-model="form_model.body"
+            >
+            </textarea>
+          </base-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <base-input>
+            <label>시간</label>
+            <textarea
+              rows="10"
+              cols="30"
+              class="form-control"
+              placeholder="시간을 입력해주세요. (yyyy/mm/dd HH/MM/SS)"
+              v-model="form_model.target_time"
             >
             </textarea>
           </base-input>
@@ -22,19 +37,20 @@
   <script>
   export default {
     props: {
-      model: {
-        type: Object,
-        default: () => {
-          return {};
-        }
+    form_model: {
+      type: Object,
+      default: () => {
+        return {};
       }
-    },
+    }
+  },
   
     methods: {
       update() {
+        console.log(this.form_model);
         try {
           this.$axios
-            .put(`http://localhost:8080/api/user/${JSON.parse(sessionStorage.getItem("user")).userId}`, JSON.stringify(this.model), {
+            .post(`http://localhost:8080/api/promise`, JSON.stringify(this.form_model), {
               headers: {
                 "Content-Type": `application/json`,
                 Authorization: `Bearer ${sessionStorage.getItem("token")}`
@@ -43,7 +59,6 @@
             .then((res) => {
               if (res.status === 200) {
                   console.log(res.data);
-                  this.$store.commit("loadInfo", res.data);
                 
               }
             });

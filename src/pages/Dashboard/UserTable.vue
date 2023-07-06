@@ -32,11 +32,15 @@
                   if (res.status === 200) {
                     for(let i = 0; i < res.data.length; i++) {
                       table.push({
-                        id: i+1,
+                        id: res.data[i].id,
                         host: (res.data[i].host_id).toString(),
                         promise: res.data[i].body,
-                        time: Array.toString(res.data[i].create_at)
+                        time: res.data[i].target_time,
                       })
+                      if(i == res.data.length-1){
+                        this.$store.commit("lastPromise", res.data[i].id)
+                      }
+                      
                     }
                     };
                   }
