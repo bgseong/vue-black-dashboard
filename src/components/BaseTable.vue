@@ -9,7 +9,7 @@
     </tr>
     </thead>
     <tbody :class="tbodyClasses">
-    <tr v-for="(item, index) in data" :key="index" @click="change(item.id)">
+    <tr v-for="(item, index) in data" :key="index" @click="change(item.id), comment()">
       <slot :row="item" >
         <td v-for="(column, index) in columns"
             :key="index"
@@ -63,6 +63,9 @@
         this.$store.commit("changeNumber", value)
         this.$store.commit("loadPromise",sessionStorage.getItem("lastPromise"))
         this.$router.push('/maps').catch(()=>{});
+      },
+      comment(){
+        this.$store.commit("loadComments", sessionStorage.getItem("lastPromise"));
       },
       hasValue(item, column) {
         return item[column.toLowerCase()] !== "undefined";

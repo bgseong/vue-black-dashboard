@@ -18,12 +18,16 @@
                 <h5>목표일 : {{ this.$store.state.promisestore.target_time }}</h5>
             </div>
         </div>
+        <Comments></Comments>
     </div>
   </template>
   
   <script>
-  
+  import Comments from './Comments.vue';
   export default {
+    components: {
+        Comments
+      },
   }
 
 
