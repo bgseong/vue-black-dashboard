@@ -59,7 +59,6 @@
     },
     methods: {
       change(value){
-        console.log(value);
         this.$store.commit("changeNumber", value)
         this.$store.commit("loadPromise",sessionStorage.getItem("lastPromise"))
         this.$router.push('/maps').catch(()=>{});

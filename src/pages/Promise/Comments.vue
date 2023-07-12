@@ -8,11 +8,14 @@
         <div v-if="this.$store.state.promisestore.lastPromise !== null">
             <div v-for="item in this.$store.state.commentstore.comments">
                 <div class="row">
-                    <div class="col-md-10">
-                        <h3>{{ item.userid }}</h3>
+                    <div class="col-md-8">
+                        <h3>{{ item.userId }}</h3>
                     </div>
                     <div class="col-md-2">
-                        <h5>{{item.createat}}</h5>
+                        <h5>{{item.createdAt}}</h5>
+                    </div>
+                    <div class="col-md-2" v-if="item.userId === model.userid">
+                        <base-button slot="footer" type="primary" fill v-on:click="deleteComment(item.id)">삭제</base-button>
                     </div>
                 </div>
                 <div class="row">
@@ -43,12 +46,14 @@
   </template>
   
   <script>
+import { del } from 'vue';
+
   
   export default {
     data(){
         return{
             model:{
-            pmid:Number(sessionStorage.getItem("lastPromise")),
+            pmid:null,
             body:null,
             userid: JSON.parse(sessionStorage.getItem("user")).userId
             }  
@@ -56,7 +61,7 @@
     },
     methods:{
     update() {
-        console.log(JSON.stringify(this.model));
+        this.model.pmid = Number(this.$store.state.promisestore.lastPromise);
         try {
           this.$axios
             .post(`http://localhost:8080/api/comment`, JSON.stringify(this.model), {
@@ -76,7 +81,28 @@
           console.error(error);
         }
       },
+      deleteComment(value) {
+        try {
+          this.$axios
+            .delete(`http://localhost:8080/api/comment/${value}`,{
+              headers: {
+                "Content-Type": `application/json`,
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`
+              },
+            })
+            .then((res) => {
+              if (res.status === 200) {
+                  this.$store.commit("loadComments",this.$store.state.promisestore.lastPromise)
+                
+              }
+            });
+  
+        } catch (error) {
+          console.error(error);
+        }
+      },
     }
+    
   }
 
 

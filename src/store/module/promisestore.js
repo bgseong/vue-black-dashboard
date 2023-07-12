@@ -26,7 +26,8 @@ const promiseStore = {
                 .get(`http://localhost:8080/api/promise/${payload}`,  {
                     headers: {
                     "Content-Type": `application/json`,
-                    Authorization: `Bearer ${sessionStorage.getItem("token")}`
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    withCredentials: true
                     },
                 })
                 .then((res) => {

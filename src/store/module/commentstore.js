@@ -19,9 +19,10 @@ const commentStore = {
                         state.comments = [];
                         for(let i = 0; i < res.data.length; i++) {
                             state.comments.push({
+                                id: Number(res.data[i].id),
                                 body: res.data[i].body,
-                                userId: res.data[i].userId,
-                                createdAt: res.data[i].createdAt
+                                userId: res.data[i].userid,
+                                createdAt: res.data[i].createat
                             })
                         }
                       }
@@ -30,7 +31,7 @@ const commentStore = {
                } catch (error) {
                 console.error(error);
             };
-        }
+        },
     }
 }
 export default commentStore
